@@ -6,7 +6,8 @@ CRTFRMSTMF is a wrapper over the IBM i CRTxxx compile commands that do not allow
 **Download with RELIC:**
 
 ```
-RELICGET PLOC('https://bitbucket.org/BrianGarland/crtfrmstmf/get/9c594465c81d.zip') PDIR('BrianGarland-crtfrmstmf-5b2d4cf7eafd') PNAME(CRTFRMSTMF)
+RELICGET PLOC('https://github.com/BrianGarland/CRTFRMSTMF/archive/master.zip') 
+PDIR('CRTFRMSTMF') PNAME(#CRTFRMSTM)
 ```
 
 
