@@ -135,6 +135,10 @@ DCL-DS ParmsDS;
     Parms    CHAR(2000);
 END-DS;
 
+DCL-DS LDA QUALIFIED DTAARA(*LDA);
+    Eventf_lib CHAR(10);
+    Eventf_mbr CHAR(10);
+END-DS;
 
 // Prototypes for errno functions
 DCL-PR strerror POINTER EXTPROC('strerror');
@@ -198,6 +202,7 @@ DCL-S Buffer           CHAR(1024);
 DCL-S BufferSizeNeeded UNS(10);
 DCL-S CommandString    CHAR(2500);
 DCL-S CCSID            INT(10);
+DCL-S CCSID_c          CHAR(10);
 DCL-S ErrorString      CHAR(100);
 DCL-S I                INT(10);
 DCL-S MsgKey           CHAR(4);
@@ -232,7 +237,13 @@ ENDIF;
 CommandString = 'DLTF FILE(QTEMP/QSOURCE)';
 CALLP(E) ExecuteCommand(CommandString:%LEN(CommandString));
 
-CommandString = 'CRTSRCPF FILE(QTEMP/QSOURCE) RCDLEN(198) MBR(' + %TRIMR(Obj) + ') CCSID(' + %CHAR(CCSID)+ ')';
+// Source physical files that are unicode create problems with CRTPF. Use Job's CCSID instead.
+IF (CCSID = 1208);
+    CCSID_c = '*JOB';
+ELSE;
+    CCSID_c = %CHAR(CCSID);
+ENDIF;
+CommandString = 'CRTSRCPF FILE(QTEMP/QSOURCE) RCDLEN(198) MBR(' + %TRIMR(Obj) + ') CCSID(' + CCSID_c + ')';
 CALLP(E) ExecuteCommand(CommandString:%LEN(CommandString));
 
 
