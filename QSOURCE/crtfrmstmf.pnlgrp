@@ -73,6 +73,18 @@ The CRTSRVPGM compile command is executed.
 :pt.:pk.CRTWSCST:epk.
 :pd.
 The CRTWSCST compile command is executed.
+:pt.:pk.CRTRPGPGM:epk.
+:pd.
+The CRTRPGPGM compile command is executed.
+:pt.:pk.CRTSQLRPG:epk.
+:pd.
+The CRTSQLRPG compile command is executed.
+:pt.:pk.CRTCBLPGM:epk.
+:pd.
+The CRTCBLPGM compile command is executed.
+:pt.:pk.CRTSQLCBL:epk.
+:pd.
+The CRTSQLCBL compile command is executed.
 :eparml.
 :ehelp.
 

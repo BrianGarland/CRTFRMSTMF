@@ -11,8 +11,8 @@
              PARM       KWD(CMD) TYPE(*NAME) LEN(10) RSTD(*YES) +
                           VALUES(CRTCMD CRTBNDCL CRTCLMOD CRTDSPF CRTPRTF +
                           CRTLF CRTPF CRTMNU CRTPNLGRP CRTQMQRY CRTSRVPGM +
-                          CRTWSCST) MIN(1) CHOICE(*VALUES) PROMPT('Compile +
-                          command')
+                          CRTWSCST CRTRPGPGM CRTSQLRPG CRTCBLPGM CRTSQLCBL) +
+                          MIN(1) CHOICE(*VALUES) PROMPT('Compile command')
 
              PARM       KWD(SRCSTMF) TYPE(*PNAME) LEN(5000) MIN(1) +
                           VARY(*YES *INT2) CASE(*MIXED) PROMPT('Source +

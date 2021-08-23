@@ -177,7 +177,11 @@ DCL-DS CommandsDS;
     *n CHAR(10) INZ('CRTQMQRY');
     *n CHAR(10) INZ('CRTSRVPGM');
     *n CHAR(10) INZ('CRTWSCST');
-    Commands CHAR(10) DIM(12) POS(1);
+    *n CHAR(10) INZ('CRTRPGPGM');
+    *n CHAR(10) INZ('CRTSQLRPG');
+    *n CHAR(10) INZ('CRTCBLPGM');
+    *n CHAR(10) INZ('CRTSQLCBL');
+    Commands CHAR(10) DIM(16) POS(1);
 END-DS;
 
 DCL-DS ObjTypesDS;
@@ -193,7 +197,11 @@ DCL-DS ObjTypesDS;
     *n CHAR(10) INZ('QMQRY');
     *n CHAR(10) INZ('SRVPGM');
     *n CHAR(10) INZ('WSCST');
-    ObjTypes CHAR(10) DIM(12) POS(1);
+    *n CHAR(10) INZ('PGM');
+    *n CHAR(10) INZ('PGM');
+    *n CHAR(10) INZ('PGM');
+    *n CHAR(10) INZ('PGM');
+    ObjTypes CHAR(10) DIM(16) POS(1);
 END-DS;
 
 
