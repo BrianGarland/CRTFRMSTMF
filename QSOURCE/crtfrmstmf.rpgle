@@ -274,7 +274,9 @@ CALLP ProcessCommand(CommandString:%SIZE(CommandString):OptCtlBlk:%SIZE(OptCtlBl
                      'CPOP0100':UpdatedString:%SIZE(UpdatedString):UpdatedStringLen:
                      APIError);
 
-if ( %scan( '*EVENTF' : CommandString ) > 0 );
+if ( %scan( '*EVENTF' : CommandString ) > 0 OR  //All ILE compile commands
+     %scan( '*SRCDBG' : CommandString ) > 0 OR  //OPM RPG and COBOL
+     %scan( '*LSTDBG' : CommandString ) > 0);   //OPM CRTSQLRPG/CBL only supports this
   if ( Lib = '*CURLIB' );
     Lib = RetrieveCurrrentLibrary();
   endif;
