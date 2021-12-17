@@ -246,7 +246,7 @@ CommandString = 'DLTF FILE(QTEMP/QSOURCE)';
 CALLP(E) ExecuteCommand(CommandString:%LEN(CommandString));
 
 // Source physical files that are unicode create problems with CRTPF. Use Job's CCSID instead.
-IF (CCSID = 1208);
+IF (CCSID = 1208 OR CCSID = 819);
     CCSID_c = '*JOB';
 ELSE;
     CCSID_c = %CHAR(CCSID);
