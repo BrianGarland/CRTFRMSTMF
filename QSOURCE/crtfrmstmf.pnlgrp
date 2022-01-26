@@ -79,12 +79,6 @@ The CRTRPGPGM compile command is executed.
 :pt.:pk.CRTSQLRPG:epk.
 :pd.
 The CRTSQLRPG compile command is executed.
-:pt.:pk.CRTCBLPGM:epk.
-:pd.
-The CRTCBLPGM compile command is executed.
-:pt.:pk.CRTSQLCBL:epk.
-:pd.
-The CRTSQLCBL compile command is executed.
 :eparml.
 :ehelp.
 

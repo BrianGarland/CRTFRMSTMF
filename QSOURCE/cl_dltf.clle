@@ -1,0 +1,8 @@
+    pgm parm(&lib &file)                         
+    dcl &lib type(*char) len(10)                 
+    dcl &file type(*char) len(10)                
+                                                 
+    dltf &lib/&file                              
+    monmsg msgid(CPF2105) exec(rcvmsg rmv(*yes)) 
+    return 
+    endpgm

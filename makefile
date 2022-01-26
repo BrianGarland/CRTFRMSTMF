@@ -5,13 +5,17 @@ TGTRLS=V7R3M0
 
 #----------
 
-all: crtfrmstmf.rpgle crtfrmstmf.pnlgrp crtfrmstmf.cmd
+all: cl_dltf.clle crtfrmstmf.rpgle crtfrmstmf.pnlgrp crtfrmstmf.cmd crtfrmstmf.pgm
 	@echo "Built all"
 
 #----------
 
-%.rpgle:
-	system "CRTBNDRPG PGM($(BIN_LIB)/$*) SRCSTMF('QSOURCE/$*.rpgle') TEXT('$(NAME)') REPLACE(*YES) DBGVIEW($(DBGVIEW)) TGTRLS($(TGTRLS)) TGTCCSID(*JOB)"
+%.pgm:
+	system "CRTPGM PGM($(BIN_LIB)/$*) MODULE($(BIN_LIB)/CRTFRMSTMF $(BIN_LIB)/CL_DLTF)"
+%.rpgle: 
+	system "CRTRPGMOD MODULE($(BIN_LIB)/$*) SRCSTMF('QSOURCE/$*.rpgle') TEXT('$(NAME)') REPLACE(*YES) DBGVIEW($(DBGVIEW)) TGTRLS($(TGTRLS)) TGTCCSID(*JOB)"
+%.clle	:
+	system "CRTCLMOD MODULE($(BIN_LIB)/$*) SRCSTMF('QSOURCE/$*.clle') TEXT('$(NAME)') REPLACE(*YES) DBGVIEW($(DBGVIEW)) TGTRLS($(TGTRLS))"
 
 %.pnlgrp:
 	-system -qi "CRTSRCPF FILE($(BIN_LIB)/QSOURCE) MBR($*) RCDLEN(112)"
