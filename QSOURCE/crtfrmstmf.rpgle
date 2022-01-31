@@ -7,7 +7,6 @@
 
 
 // Compile parameters
-CTL-OPT DFTACTGRP(*NO) ACTGRP(*NEW);
 
 
 // Prototype and Interface for this program
@@ -145,6 +144,11 @@ DCL-PR strerror POINTER EXTPROC('strerror');
     errnum INT(10) VALUE;
 END-PR;
 
+// prototype for the CL_DLTF CLLE module
+dcl-pr cl_dltf;
+   lib char(10) const;
+   file char(10) const;
+end-pr;  
 
 // Standard API error return structure
 DCL-DS APIError QUALIFIED;
@@ -179,9 +183,7 @@ DCL-DS CommandsDS;
     *n CHAR(10) INZ('CRTWSCST');
     *n CHAR(10) INZ('CRTRPGPGM');
     *n CHAR(10) INZ('CRTSQLRPG');
-    *n CHAR(10) INZ('CRTCBLPGM');
-    *n CHAR(10) INZ('CRTSQLCBL');
-    Commands CHAR(10) DIM(16) POS(1);
+    Commands CHAR(10) DIM(14) POS(1);
 END-DS;
 
 DCL-DS ObjTypesDS;
@@ -199,9 +201,7 @@ DCL-DS ObjTypesDS;
     *n CHAR(10) INZ('WSCST');
     *n CHAR(10) INZ('PGM');
     *n CHAR(10) INZ('PGM');
-    *n CHAR(10) INZ('PGM');
-    *n CHAR(10) INZ('PGM');
-    ObjTypes CHAR(10) DIM(16) POS(1);
+    ObjTypes CHAR(10) DIM(14) POS(1);
 END-DS;
 
 
@@ -242,8 +242,7 @@ ENDIF;
 
 
 // Create temporary source file
-CommandString = 'DLTF FILE(QTEMP/QSOURCE)';
-CALLP(E) ExecuteCommand(CommandString:%LEN(CommandString));
+cl_dltf ('QTEMP': 'QSOURCE');   
 
 // Source physical files that are unicode create problems with CRTPF. Use Job's CCSID instead.
 IF (CCSID = 1208 OR CCSID = 819);
@@ -275,8 +274,8 @@ CALLP ProcessCommand(CommandString:%SIZE(CommandString):OptCtlBlk:%SIZE(OptCtlBl
                      APIError);
 
 if ( %scan( '*EVENTF' : CommandString ) > 0 OR  //All ILE compile commands
-     %scan( '*SRCDBG' : CommandString ) > 0 OR  //OPM RPG and COBOL
-     %scan( '*LSTDBG' : CommandString ) > 0);   //OPM CRTSQLRPG/CBL only supports this
+     %scan( '*SRCDBG' : CommandString ) > 0 OR  //OPM RPG
+     %scan( '*LSTDBG' : CommandString ) > 0);   //OPM CRTSQLRPG only supports this
   if ( Lib = '*CURLIB' );
     Lib = RetrieveCurrrentLibrary();
   endif;
@@ -405,8 +404,6 @@ dcl-proc UpdateEventFile;
     path   pointer value options(*string);
     buf    likeds(statds);
   end-pr;
-
-  // int stat(const char *path, struct stat *buf)
 
   dcl-pr CEEUTCO opdesc;
     Hours         int( 10 );
