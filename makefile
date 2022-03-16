@@ -5,13 +5,15 @@ TGTRLS=V7R3M0
 
 #----------
 
-all: $(BIN_LIB).lib cl_dltf.clle crtfrmstmf.rpgle crtfrmstmf.pnlgrp crtfrmstmf.cmd crtfrmstmf.pgm
+all: $(BIN_LIB).lib cl_dltf.clle crtfrmstmf.rpgle crtfrmstmf.pnlgrp crtfrmstmf.cmd crtfrmstmf.pgm cleanup
 	@echo "Built all"
 
 #----------
 
 %.pgm:
 	system "CRTPGM PGM($(BIN_LIB)/$*) MODULE($(BIN_LIB)/CRTFRMSTMF $(BIN_LIB)/CL_DLTF)"
+	-system -qi "DLTMOD MODULE($(BIN_LIB)/CRTFRMSTMF)"
+	-system -qi "DLTMOD MODULE($(BIN_LIB)/CL_DLTF)"
   
 %.rpgle: 
 	system "CRTRPGMOD MODULE($(BIN_LIB)/$*) SRCSTMF('QSOURCE/$*.rpgle') TEXT('$(NAME)') REPLACE(*YES) DBGVIEW($(DBGVIEW)) TGTRLS($(TGTRLS)) TGTCCSID(*JOB)"
@@ -29,6 +31,9 @@ all: $(BIN_LIB).lib cl_dltf.clle crtfrmstmf.rpgle crtfrmstmf.pnlgrp crtfrmstmf.c
 %.lib:
 	-system -qi "CRTLIB LIB($(BIN_LIB)) TEXT('$(NAME)')"
 	-system -qi "CRTSRCPF FILE($(BIN_LIB)/QSOURCE) MBR($*) RCDLEN(112)"
+
+cleanup:
+	-system -qi "DLTF $(BIN_LIB)/QSOURCE"
 
 clean:
 	system "CLRLIB LIB($(BIN_LIB))"

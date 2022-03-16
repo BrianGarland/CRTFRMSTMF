@@ -1,1 +1,5 @@
-{"curlib": "CRTFRMSTMF"}
+{
+"curlib": "CRTFRMSTMF",
+"description": "Create QSYS objects from stream files even when the compilers do not support it.",
+"buildCommand": "gmake"
+}
